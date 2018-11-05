@@ -1,0 +1,79 @@
+
+<div class="container my-5">
+
+  <div class="row no-gutters">
+    <div class="col-xs-12">
+      <h3>Routing (<a href="https://github.com/jelkada/routing" target="_blank">see on github</a>)</h3>
+    </div>
+  </div>
+
+  <hr class="mt-5" />
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <ul class="nav nav-tabs">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="/servers">Servers</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/users']">Users</a></li>
+      </ul>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <hr class="mt-5"/>
+
+  <div class="row no-gutters">
+    <div class="col-xs-12 ng-non-bindable">
+      <h4 class="mt-3">Routing highlights:</h4>
+      <ul>
+        <li>The Routing feature is used to load different components of the SPA web application in various URLs/paths.</li>
+        <li>Routing help dividing the applications into logical URL views by binding them to the components.</li>
+        <li>Routing in Angular allows for moving the user between multiple views of the SAP application, while updating the URL</li>
+        <li>It make the navigation feel like a multi-page site, so the site does not look like an SAP web application.</li>
+        <li>The routing module provides extensive URL capabilities such as query parameters, deep linking, directives, child routes and data services.</li>
+        <li>With Routing components are initialized through the URL/path parameters as opposed to through data binding.</li>
+     </ul>
+      <h4 class="mt-3">Usage guidelines:</h4>
+      <ul>
+        <li>Create AppRoutingModule that contains the appRoutes constant, which defines all the paths/routes.<br/>Ex:  &#123; 'path':'users', component:UsersComponent &#125;.</li>
+        <li>Import the AppRoutingModule in the main app.module.ts along with all components imports.<br/>Ex: import &#123; AppRoutingModule &#125; from './app-routing.module';</li>
+        <li>You could add any sub paths/urls using the colon notation.<br/>Ex: &#123; 'path': ':id/:name', component: UserComponent &#125;</li>
+        <li>You could use wildcards in the path property.<br/>Ex: &#123; 'path': '**', redirectTo: 'not-found' &#125;</li>
+        <li>You could aceess the URL parameters (the values after the colon) in the component by declaring the route in the constructor.<br/>Ex: constructor(private route: ActivatedRoute) &#123; &#125;</li>
+        <li>After you define and set up the path URLs, use the &lt;router-outlet&gt; component in your HTML template, to indicate that a component is expeced from the routing module.</li>
+        <li>The Router outlet component &lt;router-outlet&gt;&lt;/router-outlet&gt; is a placeholder for a components that gets filled dynamically by Angular using the routing object and depending on the current routing state.</li>
+        <li>Other components/view will call this route by using the &lt;routerlink&gt; directive,</li>
+        <li>&lt;routerlink&gt; can be passed a string or an array of elements/strings for the path related segments</li>
+        <li>&lt;routerlink&gt; catches the click on the HTML element and prevents the default click.</li>
+        <li>&lt;routerlink&gt; analyzes and parses the given value/path to match it with the value from the appRoutes setup, in order to decide which component to load for the given value/path.</li>
+        <li>&lt;routerlink&gt; path is relative to the current component location and can accept folder directory notation such as "../../users"</li>
+        <li>The CanActivate and CanDeactivate services determine if a route or path can be accessed or moved away from, and if the corresponding component will be rendered.</li>
+        <li>The Resolver service runs a code or does some preloading before a route or path is accessed and the component is rendered.</li>
+        <li>The params property of the activatedRoute is an observable which allows to work with an asynchronous tasks (it is unknkown when and if the code will be executed and we cannot block execution and wait for it to code runs).</li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>
+
+<!--
+
+- 
+- You could access these URL parameters in ngOnInit using the route, for example: his.route.snapshot.params['id']
+- Subscribe to the activated route params if the view/component instance can be initialized multiple times, in order to update the route path with the instance parameters, for example, 
+this.activatedRoute.params.subscribe((params: Params) => { this.user.id = params['id']; });
+- You could add CanActivate and CanDeactivate services to determine if a route or path can be accessed or moved away from.
+- You could add a Resolver service runs a code or do some preloading before a route is accessed and the component is rendered. This can be done using the resolve() function of the Resolve module and import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+- In the HTML template use the router directives to hook up the router to the main navigation css/classes, such as [routerLinkActive]="['active']" and the routerLinkActiveOptions]
+
+
+
+
+ -->
+
+
